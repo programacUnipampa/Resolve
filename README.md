@@ -16,7 +16,7 @@
     composer install
     ```    
     ```
-    Copy .env.example to .env and configure you workspace
+    copy .env.example to .env and configure you workspace
     ```    
     ```
     php artisan key:generate
