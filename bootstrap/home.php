@@ -47,7 +47,7 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-3">
+        <div class="col-lg-12 col-lg-3">
             <div class="list-group">
                 <h1> <i class="glyphicon glyphicon-filter"></i> Filtros </h1>
                 <div class="dropdown">
@@ -57,7 +57,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dLabel">
                         <?php
-                        for ($i = 1; $i < 6; $i++){
+                        for ($i = 1; $i < 9; $i++){
                             echo "<li> <a href='#'> $categoria[$i]</a> </li>";
                         } ?>
 
