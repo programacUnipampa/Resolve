@@ -1,3 +1,91 @@
+<?php
+
+$categoria = [
+    1 => 'Dança',
+    2 => 'Esportes',
+    3 => 'Jogos',
+    4 => 'Lazer',
+    5 => 'Música',
+    6 => 'Saúde',
+    7 => 'Teatro',
+    8 => 'Tecnologia'
+];
+
+$evento = [
+    10 => [
+        "nome" => "FLUXO TOTAL COM RODA DE PAGODE",
+        "descricao" => "
+                    🔥FLUXO TOTAL com RODA DE PAGODE, o pagode fica por conta do grupo AMIGOS DO SAMBA (grupo do Itamar)
+                    <br>Dia 06/09 vem curtir mais uma festa top com o Open Bar de suco gummy até as 2:00 hrs da madrugada💥
+                    <br>Se liga na promo ➡️ se você comprar um combo no valor de R$60,00 ganha entrada free e ainda pode chamar dois amigos para curtir a festa sem pagar a entrada 💥
+                    <br>
+                    <br>Se liga nos valores ⬇️
+                    <br>Masculino: 15,00
+                    <br>Feminino: Entrada totalmente FREE
+        ",
+        "categoria" => "5",
+        "data" => "06/07/2019",
+        "local" => "Rua Demétrio, n°175, com Tamandaré ",
+        "preco" => "R$ 15.00"
+    ],
+    9 =>[
+        "nome" => "Tchelinux 2019 Alegrete",
+        "descricao" => "O grupo de usuários de Software Livre Tchelinux em parceria com a Universidade Federal do Pampa Campus Alegrete (UNIPAMPA) tem o prazer de convidar a comunidade para o evento que ocorrerá no dia 14 de Setembro de 2019 a partir das 8:00h na UNIPAMPA em Alegrete.",
+        "categoria" => "8",
+        "data" => "14/07/2019",
+        "local" => "UNIPAMPA - <i> Campus </i> alegrete",
+        "preco" => "Gratuito"
+
+    ],
+    8 =>[
+        "nome" => "ERRC - Escola Regional de Rede de Computadores",
+        "descricao" => "
+            A 17a Escola Regional de Redes de Computadores – ERRC 2019 – ocorrerá em Alegrete/RS, entre os dias 16 a 19 de Setembro/2019, sendo organizada pela Universidade Federal do Pampa (Unipampa).
+            <br>A ERRC é um evento anual promovido pela Sociedade Brasileira de Computação (SBC). Ao longo dos anos, a ERRC tornou-se um dos mais importantes eventos científicos em redes de computadores no Rio Grande do Sul.
+            <br>A Escola dirige seu foco principalmente aos alunos de graduação e pós-graduação, bem como aos profissionais que atuam em redes de computadores dentro do âmbito do estado. O formato inclui palestras, minicursos e oficinas. Os alunos de programas de graduação e pós-graduação com trabalhos relacionados aos temas do evento são convidados a apresentarem artigos e, caso estes sejam aceitos, apresentá-los no evento. Assim, a Escola de Redes de Computadores firma-se como um fórum técnico-científico para a área, onde alunos e profissionais podem discutir o estado-da-arte e as tendências em redes de computadores.                    
+        ",
+        "categoria" => "8",
+        "data" => "16/07/2019",
+        "local" => "UNIPAMPA - <i> Campus </i> alegrete",
+        "preco" => "R$ 31.00"
+
+    ],
+    7 =>[
+        "nome" => "Badin em Alegrete - RS",
+        "descricao" => "
+            
+            👉 INGRESSO SOLIDÁRIO ( PROMOCIONAL ANTECIPADO): R$ 30,00 + 1KG DE ALIMENTO NÃO PERECÍVEL (O alimento deverá ser entregue no dia e local do evento).          
+            <br>👉MEIA ENTRADA: R$ 30,00
+            <br>👉INTEIRA (HORA) : R$ 60,00            
+            <br>
+            
+                      
+            <br>☎ Informações
+            <br>(51) 992706518
+            <br>(51) 996738565
+            <br>
+            <br>➡️ Realização Risoteca Produtora
+            
+            <br>👥 Classificação Livre                    
+        ",
+        "categoria" => "7",
+        "data" => "30/10/2019",
+        "local" => "CTG Farroupilha",
+        "preco" => "R$ 30.00 - R$ 35.00"
+
+    ],
+    6 =>[
+        "nome" => "Palestra com André Trigueiro em Alegrete",
+        "descricao" => " Palestra sobre a prevenção do suicídio no Brasil e no mundo. ",
+        "categoria" => "6",
+        "data" => "09/11/2019",
+        "local" => "Clube Caixeral de Alegrete",
+        "preco" => "Gratuito"
+
+    ],
+];
+?>
+
 <html>
 <head>
     <style>
@@ -25,12 +113,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="border: 0; padding: 0; >
-                    <img src="logo2.png" class="img-responsive" style="height: 50px;">
+                <a class="navbar-brand" href="index.php" style="border: 0; padding: 0;" >
+                    <!-- <img src="logo2.png" class="img-responsive" style="height: 50px;"> -->
+                    <p class="navbar-brand"><b>      Resolve! </b></p>
                 </a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
 
@@ -45,6 +134,7 @@
                     </div>
 
                 </form>
+                <!--
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -52,137 +142,19 @@
                         <ul class="dropdown-menu">
                         </ul>
                     </li>
-                </ul>
+                </ul>-->
             </div>
         </div>
     </nav>
     <?php
-        $categoria = [
-            1 => 'Dança',
-            2 => 'Esportes',
-            3 => 'Jogos',
-            4 => 'Música',
-            5 => 'Teatro'
-        ];
+
+        if(isset($_GET['pag']) && file_exists("$_GET[pag].php")){
+            include "$_GET[pag].php";
+        }else{
+            include "home.php";
+        }
+
     ?>
-
-            <div style="margin-top: -20; padding: 0;">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="1" class='active'></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-
-                        <div class="item active">
-                            <a href="#">
-                                <img src="imagens/evento1.png" alt="1" style="width:100%;">
-                            </a>
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <a href="#">
-                                <img src="imagens/evento4.png" alt="4" style="width:100%;">
-                            </a>
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Próximo</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="list-group">
-                    <h1> <i class="glyphicon glyphicon-filter"></i> Filtros </h1>
-                    <div class="dropdown">
-                        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default filtro">
-                            Categorias
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <?php
-                                for ($i = 1; $i < 6; $i++){
-                                    echo "<li> <a href='#'> $categoria[$i]</a> </li>";
-                                }
-                            ?>
-
-                            <li> <a href="#"> Esportes</a> </li>
-                            <li> <a href="#"> Música</a> </li>
-                        </ul>
-                    </div> <br>
-                    <div class="dropdown">
-                        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default filtro">
-                            Entrada
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li> <a href="#"> Entrada paga </a> </li>
-                            <li> <a href="#"> Entrada gratuita </a> </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <?php
-                for ($i = 0; $i < 11; $i++){
-                $random = rand(1, 5);
-            ?>
-                <div class="col-sm-6 col-md-3">
-                    <div class="thumbnail">
-                        <img src="imagens/evento<?= $random?>.png" alt="...">
-                        <div class="caption">
-                            <h3> Título do Evento </h3>
-                            <sup> <?= $categoria[$random]?> </sup>
-                            <p> Xxxxxxxxxxxxxxxxxxxxxxxx.</p>
-                            <p> <h5><i class="glyphicon glyphicon-calendar"></i> Data: <?= rand(1, 31) ."/". rand(1,12) ."/". 2019 ?> </h5></p>
-                            <p> <h5><i class="glyphicon glyphicon-globe"></i> Local: Xxxxxx </h5></p>
-                            <p> <h5><i class="glyphicon glyphicon-usd"></i> Preço: Gratuito </h5></p>
-
-                            <a href="#" class="btn btn-success" style="width: 100%"> Ver mais! </a>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-        <div class="col-sm-6 col-md-12">
-            <nav aria-label="Page navigation" style="width: 100%; text-align:center">
-                <ul class="pagination">
-                        <li>
-                            <a href="" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li> <a href="">1</a> </li>
-                        <li> <a href="">2</a> </li>
-                        <li> <a href="">3</a> </li>
-                        <li> <a href="">4</a> </li>
-                        <li> <a href="">5</a> </li>
-                        <li> <a href="">6</a> </li>
-                        <li>
-                            <a href="?pagina=<?= $_GET['pagina'] + 1?>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-
     <footer style="background: #292b2c; color: white; padding: 5px;">
         <div class="container-fluid">
             <div class="row">
