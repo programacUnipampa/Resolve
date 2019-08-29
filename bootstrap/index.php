@@ -33,7 +33,7 @@ $evento = [
         "descricao" => "O grupo de usuários de Software Livre Tchelinux em parceria com a Universidade Federal do Pampa Campus Alegrete (UNIPAMPA) tem o prazer de convidar a comunidade para o evento que ocorrerá no dia 14 de Setembro de 2019 a partir das 8:00h na UNIPAMPA em Alegrete.",
         "categoria" => "8",
         "data" => "14/07/2019",
-        "local" => "UNIPAMPA - <i> Campus </i> alegrete",
+        "local" => "UNIPAMPA - <i> Campus </i> Alegrete",
         "preco" => "Gratuito"
 
     ],
@@ -46,7 +46,7 @@ $evento = [
         ",
         "categoria" => "8",
         "data" => "16/07/2019",
-        "local" => "UNIPAMPA - <i> Campus </i> alegrete",
+        "local" => "UNIPAMPA - <i> Campus </i> Alegrete",
         "preco" => "R$ 31.00"
 
     ],
