@@ -1,55 +1,69 @@
 <?php
-    if(isset($_GET['rand'])){
-        if(isset($_GET['id'])){
-            $random = addslashes($_GET['id']);
+    if(isset($_GET['id'])){
+        $id = addslashes($_GET['id']);
+        $query = mysqli_query($con, "SELECT * FROM evento WHERE id_evento = $id");
+        if(mysqli_num_rows($query) > 0){
+            $evento = mysqli_fetch_array($query);
         }else{
-            $random = addslashes($_GET['rand']);
+            header("location: .?pag=error");
+            exit;
         }
-
     }else{
-        echo "
-            <script>
-                window.location('index.php');
-                window.alert('Evento não Encontrado');
-            </script>
-        ";
+        header("location: .?pag=error");
+        exit;
     }
-?>
-<title> <?= $random > 5 ? $evento[$random]["nome"] : "Título do Evento"?></title>
+    $query = mysqli_query($con, "SELECT * FROM categoria WHERE id_categoria = '$evento[categoria_id_categoria]'");
+    $categoria = mysqli_fetch_array($query);
+    $evento['categoria'] = $categoria['nome'];
+?><br><br>  
+<title> <?= $evento["nome"]?></title>
 <div class="container">
     <div class="row">
+
         <div class="col-md-4">
-            <img style="width: 100%;" src="imagens/evento<?= $random?>.png">
-            <h4><i class="glyphicon glyphicon-calendar"></i> Data: <?= $random > 5 ? $evento[$random]["data"] : rand(1, 31) ."/". rand(1,12) ."/". 2019 ?> </h4>
-            <h4 ><i class="glyphicon glyphicon-globe"></i> Local: <?= $random > 5 ? $evento[$random]["local"] : "Xxxxxxxxxx" ?> </h4>
-            <h4><i class="glyphicon glyphicon-usd"></i> Preço:  <?= $random > 5 ? $evento[$random]["preco"] : "Gratuito" ?>  </h4>
+
+            <img style="width: 100%;" src="assets/images/<?= $evento["image"]?>"><h2>
+            <h4><i class="glyphicon glyphicon-calendar"></i> Data: <?= date("d/m/Y", strtotime($evento["data"])) ?> </h4>
+            <h4 ><i class="glyphicon glyphicon-globe"></i> Local: <?= $evento["local"] ?> </h4>
+            <h4><i class="glyphicon glyphicon-usd"></i> Preço:  <?= $evento["preco"] > 0 ? "R$".$evento["preco"].".00" : "Gratuito" ?>  </h4>
             <br> <br> <br>
         </div>
         <div class="col-md-8">
-            <h1> <?= $random > 5 ? $evento[$random]["nome"] : "Título do Evento" ?> </h1>
-            <sup> <?= $random > 5 ? $categoria[$evento[$random]["categoria"]] : $categoria[$random]?> </sup>
+
+            <h1 style="margin-bottom: 0"> <?= $evento["nome"] ?> </h1>
+            <h5 style="margin-top: 0;"> <?= $evento["categoria"] ?> </h5>
             <h4> Descrição </h4>
-            <p style="text-align: justify"> <?= $random > 5 ? $evento[$random]["descricao"] : "Xxxxxxxxx xxxxxxxxxxxx xx xxxxxxxxx xxxxxxxx xxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxx xxxxxxxx. Xxxxxxxxx xxxxxxxxxxxx xx xxxxxxxxx xxxxxxxx xxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxx xxxxxxxx. Xxxxxxxxx xxxxxxxxxxxx xx xxxxxxxxx xxxxxxxx xxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxx xxxxxxxx. Xxxxxxxxx xxxxxxxxxxxx xx xxxxxxxxx xxxxxxxx xxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxx xxxxxxxx.  Xxxxxxxxx xxxxxxxxxxxx xx xxxxxxxxx xxxxxxxx xxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxx xxxxxxxx. " ?> </p>
+            <p style="text-align: justify"> <?= $evento["descricao"]?> </p>
 
         </div>
-
-        <div class="col-md-12">
-
+        <div class="col col-lg-12">
+            <h3>Eventos Relacionados</h3>
             <?php
-            for ($i = 0; $i < 6; $i++){ ?>
-                <div class="col-sm-6 col-md-2">
+            $query = mysqli_query($con, "
+                SELECT
+                    *
+                FROM
+                    evento
+                WHERE
+                    categoria_id_categoria = $categoria[id_categoria] AND
+                    id_evento != $evento[id_evento]
+                    
+            ");
+            while($relacionados = mysqli_fetch_array($query)){ ?>
+                <div class="col-md-12 col-md-2">
+
                     <div class="thumbnail">
-                        <img src="imagens/evento0.png" alt="<?= $random?>">
+                        <img src="assets/images/<?= $relacionados["image"] ?>" style="width: 100%; max-height:100%; height: 150px; object-fit: cover" alt="<?= $i?>">
                         <div class="caption">
-                            <h4> Título do Evento </h4>
 
-                            <a href=".?pag=evento" class="btn btn-default btn-sm" style="width: 100%"> Ver mais! </a>
 
+                            <a href=".?pag=evento&id=<?= $relacionados['id_evento'] ?>" class="btn btn-default" style="width: 100%; border-color: #076018; color: #076018;"> Ver mais! </a>
                         </div>
                     </div>
-
                 </div>
-            <?php } ?>
+            <?php } if(mysqli_num_rows($query) == 0){
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;<i> Nenhum resultado encontrado! </i>";
+            }?>
         </div>
     </div>
 </div>
