@@ -1,5 +1,13 @@
 <title> ReUni </title>
 
+<?php
+/*
+    if(isset($_GET['filtro'])){
+        echo "<br><br><br><br><br><br>";
+        var_dump($_GET['filtro']);exit;
+    } */
+?>
+
 <style>
     #RespCar{
         margin: auto;
@@ -74,7 +82,7 @@
         <br> <br> <br>
         </div>
         <div class="col-lg-12 col-lg-3">
-
+                <form >
                 <h2> <i class="glyphicon glyphicon-filter"></i> Filtros </h2>
                         <h4>Categorias</h4>&nbsp
                         <?php
@@ -94,7 +102,7 @@
                             <label for="<?= $categoria['id_categoria']?>">
                                 <?= $categoria["nome"] ?>
                             </label> <br>&nbsp
-                            <?php }
+                            <?php } $cat[8] = 'Outros';
                         ?>
                         <input type="checkbox" id="8" name="filtro" value="8">
                         &nbsp<span class='fa fa-plus-circle'></span>
@@ -103,9 +111,10 @@
                             Outros
                         </label> <br>&nbsp
             <br> <br>
-            <button class="btn btn-default filtro" style="border-color: #076018; color: #076018;" disabled>
+            <button class="btn btn-default filtro" style="border-color: #076018; color: #076018;" type="submit" disabled>
                     Filtrar
                 </button>
+                </form>
                 <br>
         </div>
         <?php

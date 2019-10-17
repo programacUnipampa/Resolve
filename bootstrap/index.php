@@ -94,8 +94,9 @@ include "conexao.php";
     <footer style=" background-color: #efefef;  padding: 5px; border-top: solid 0.2px #bdc1bd;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 col-md-12">
-                    <p style="text-align: center; color:black; margin-top: 5px;"> Programa C | Resolve! </p>
+                <div class="col-md-12 col-md-12 text-center">
+                    <p style="margin: 0; color:black; margin-top: 5px;"> Programa C | Resolve! </p>
+                    <small> Ver nossa <a href=".?pag=politica">política de privacidade</a>  </small>
                 </div>
             </div>
         </div>
