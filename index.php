@@ -10,7 +10,7 @@ include "conexao.php";
             background: ;
         }
         .pesq_aum{
-            width: 250%;
+            width: 100%;
         }
         .filtro{
             width: 100%;
@@ -57,24 +57,26 @@ include "conexao.php";
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left"  >
                     <input type="hidden" name="pag" value="pesquisa" >
-                    <div class="input-group pesq_aum" style="border-radius: 3px; padding-left: 20px;">
+                    <div class="input-group pesq_aum" style="border-radius: 3px; padding-left: 30px;">
 
-                        <input style="height: 40px; "  type="text" class="form-control" placeholder="Pesquisar" name="key">
+
                         <div class="input-group-btn">
+                            <select style="height: 40px;" class="form-control">
+                                <option>Eventos</option>
+                                <option>Páginas</option>
+                                <option>Promoters</option>
+                            </select>
+                            <input style="height: 40px;border-left-color: white"  type="text" class="form-control" placeholder="Pesquisar" name="key">
                             <button class="btn btn-default" type="submit" style="height: 40px; background-color:rgba(76, 147, 90, 0.44)">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
                     </div>
+                    <div class="input-group">
+                        <div class="input-group-btn">
 
+                        </div>
                 </form>
-                <?php
-                    if(isset($_GET['pag']) && ($_GET['pag'] == 'evento' || $_GET['pag'] == 'pesquisa')){
-                ?>
-                <ul class="nav navbar-nav navbar-right navbar-brand" style="padding: 10px; padding-bottom: 0; margin-bottom: 0; padding-right: 40px">
-
-                </ul>
-                <?php }?>
             </div>
         </div>
     </nav>
@@ -96,7 +98,7 @@ include "conexao.php";
             <div class="row">
                 <div class="col-md-12 col-md-12 text-center">
                     <p style="margin: 0; color:black; margin-top: 5px;"> Programa C | Resolve! </p>
-                    <small> Ver nossa <a href=".?pag=politica">política de privacidade</a>  </small>
+                    <small> Ver nossa <a href=".?pag=politica" class="text-success">política de privacidade</a>  </small>
                 </div>
             </div>
         </div>
@@ -108,3 +110,4 @@ include "conexao.php";
     
 </body>
 </html>
+

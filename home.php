@@ -10,12 +10,16 @@
 
 <style>
     #RespCar{
-        margin: auto;
-        max-width:auto;
-        max-height:100%;
-        width: auto;
+        max-width: auto;
+        max-height: 100%;
         height: 400px;
-        object-fit: cover
+        position: absolute;
+        z-index: 2;
+        margin: auto;
+        top: 0;
+        left: 1%;
+        right: 1%;
+        object-fit: cover;
     }
     @media only screen and (max-width: 1000px){
 
@@ -53,16 +57,19 @@
                 <div class="carousel-inner">
                     <?php $i = 0;
                         if(empty($_GET['filtro'])){
-                            $query = mysqli_query($con, "SELECT * FROM evento ORDER BY data LIMIT 0, 5");
+                            $query = mysqli_query($con_api, "SELECT * FROM events ORDER BY date LIMIT 0, 5");
                         }else{
-                            $query = mysqli_query($con, "SELECT * FROM evento ORDER BY data LIMIT 0, 5");
+                            $query = mysqli_query($con_api, "SELECT * FROM events ORDER BY date LIMIT 0, 5");
                         }
                         while($carrossel = mysqli_fetch_array($query)){ $i++;
 
                     ?>
-                    <div class="item <?= $i == 1 ? 'active' : ''?>" style="background: rgba(0,0,0,0.50)">
-                        <a href=".?pag=evento&id=<?=$carrossel['id_evento']?>">
-                            <img src="assets/images/<?= $carrossel['image']?>" alt="10" id="RespCar">
+                    <div class="item <?= $i == 1 ? 'active' : ''?>">
+                        <div style="background-image: url('assets/images/<?= $carrossel['image']?>'); filter: blur(8px);  background-position: center;
+                                background-repeat: no-repeat; z-index: 1;
+                                background-size: cover; height: 400px;"></div>
+                        <a href=".?pag=evento&id=<?=$carrossel['id']?>">
+                            <img src="assets/images/<?= $carrossel['image']?>" alt="<?= $carrossel['id']?>" id="RespCar">
                         </a>
                         <div class="carousel-caption">
                         </div>
@@ -89,27 +96,21 @@
 
 
 
-                            $query = mysqli_query($con, "SELECT * FROM categoria WHERE  nome != 'outros' ORDER BY nome");
-
+                            $query = mysqli_query($con_api, "SELECT DISTINCT category FROM events");
+                            $i = 0;
                             while($categoria = mysqli_fetch_array($query)){
-                                $cat[$categoria['id_categoria']] = $categoria['nome'];
+                                $i++
 
                                 ?>
 
-                            <input type="checkbox" id="<?= $categoria['id_categoria']?>" name="filtro" value="<?= $categoria['id_categoria']?>">
-                                &nbsp <?= $categoria['icone'] == "" ? "" : "<span class='fa fa-$categoria[icone]'></span>" ?>
+                            <input type="checkbox" id="a<?=$i?>" name="filtro" value="">
 
-                            <label for="<?= $categoria['id_categoria']?>">
-                                <?= $categoria["nome"] ?>
+
+                            <label for="a<?=$i?>">
+                                <?= ucfirst($categoria["category"]) ?>
                             </label> <br>&nbsp
-                            <?php } $cat[8] = 'Outros';
+                            <?php }
                         ?>
-                        <input type="checkbox" id="8" name="filtro" value="8">
-                        &nbsp<span class='fa fa-plus-circle'></span>
-
-                        <label for="8">
-                            Outros
-                        </label> <br>&nbsp
             <br> <br>
             <button class="btn btn-default filtro" style="border-color: #076018; color: #076018;" type="submit" disabled>
                     Filtrar
@@ -120,14 +121,14 @@
         <?php
 
         $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
-        $query = mysqli_query($con, "SELECT * FROM evento");
+        $query = mysqli_query($con_api, "SELECT * FROM events");
 
         $total = mysqli_num_rows($query);
         $quantidadePpag = 6;
         $numPag = ceil($total/$quantidadePpag);
         $inicio = ($quantidadePpag * $pagina) - $quantidadePpag;
 
-        $query = mysqli_query($con, "SELECT * FROM evento ORDER BY data LIMIT  $inicio, $quantidadePpag");
+        $query = mysqli_query($con_api, "SELECT * FROM events ORDER BY date LIMIT  $inicio, $quantidadePpag");
 
 
             $total = mysqli_num_rows($query);
@@ -136,36 +137,40 @@
 
 
 
-            if(mysqli_num_rows($query) > 0){
-                while($evento = mysqli_fetch_array($query)){ ?>
+            if(mysqli_num_rows($query) > 0){ $i = 0;
+                while($evento = mysqli_fetch_array($query)){ $i++;?>
 
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
 
                     <img src="assets/images/<?= $evento["image"] ?>" style="width: 100%; max-height:100%; height: 150px; object-fit: cover" alt="<?= $i?>">
                     <div class="caption">
-                        <h4> <?= $evento["nome"] < 15 ? substr($evento["nome"], 0, 17)."..." : $evento["nome"]?> </h4>
+                        <h4> <?= $evento["name"] < 15 ? substr($evento["name"], 0, 17)."..." : $evento["name"]?> </h4>
 
-                        <sup> <?= $cat[$evento['categoria_id_categoria']]?> </sup>
+                        <sup> <?= $evento['category']?> </sup>
 
                         <p> <h5>
                             <i class="glyphicon glyphicon-calendar"></i>
-                            Data: <?= date("d/m/Y", strtotime($evento["data"])) ?>
+                            Data: <?= date("d/m/Y", strtotime($evento["date"])) ?>
+                        </h5></p>
+                        <p> <h5>
+                            <i class="glyphicon glyphicon-time"></i>
+                            Horário: <?= date("H:i", strtotime($evento["date"])) ?>
                         </h5></p>
                         <p> <h5>
                             <i class="glyphicon glyphicon-globe"></i>
-                            Local: <?= $evento["local"] < 15 ? substr($evento["local"], 0, 17)."..." : $evento["local"] ?>
+                            Local: <?= $evento["place"] < 15 ? substr($evento["place"], 0, 15)."..." : $evento["place"] ?>
                         </h5></p>
                         <p> <h5>
                             <i class="glyphicon glyphicon-usd"></i>
-                            Preço:   <?= $evento["preco"] > 0 ? "R$".$evento["preco"].".00" : "Gratuito" ?>
+                            Preço:   <?= $evento["price"] > 0 ? "R$".$evento["price"] : "Gratuito" ?>
                         </h5></p>
 
-                        <a href=".?pag=evento&id=<?= $evento['id_evento'] ?>" class="btn btn-default" style="width: 100%; border-color: #076018; color: #076018;"> Ver mais! </a>
+                        <a href=".?pag=evento&id=<?= $evento['id'] ?>" class="btn btn-default" style="width: 100%; border-color: #076018; color: #076018;"> Ver mais! </a>
                     </div>
                 </div>
             </div>
-        <?php } } ?>
+        <?php  if($i == 3){ echo "<div class='col-sm-6 col-md-3'></div>"; } } } ?>
 
     </div>
     <div class="col-sm-6 col-md-12">
