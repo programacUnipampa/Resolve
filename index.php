@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "conexao.php";
 ?>
 <html>
@@ -61,11 +61,11 @@ include "conexao.php";
 
 
                         <div class="input-group-btn">
-                            <select style="height: 40px;" class="form-control">
+                          <!--  <select style="height: 40px;" class="form-control">
                                 <option>Eventos</option>
                                 <option>Páginas</option>
                                 <option>Promoters</option>
-                            </select>
+                            </select> -->
                             <input style="height: 40px;border-left-color: white"  type="text" class="form-control" placeholder="Pesquisar" name="key">
                             <button class="btn btn-default" type="submit" style="height: 40px; background-color:rgba(76, 147, 90, 0.44)">
                                 <i class="glyphicon glyphicon-search"></i>
