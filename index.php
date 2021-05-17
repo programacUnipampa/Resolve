@@ -83,12 +83,12 @@ include "conexao.php";
     <div style="margin-top: 51px">
         <?php
 
-        if(isset($_GET['pag']) && file_exists("$_GET[pag].php")){
-            include "$_GET[pag].php";
+        if(isset($_GET['pag']) && file_exists("pages/$_GET[pag].php")){
+            include "pages/$_GET[pag].php";
         }elseif(isset($_GET['pag']) && !file_exists("$_GET[pag].php")){
-            include "error.php";
+            include "pages/error.php";
         }else{
-            include "home.php";
+            include "pages/home.php";
         }
 
         ?>
